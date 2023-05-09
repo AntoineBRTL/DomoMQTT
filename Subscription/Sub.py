@@ -1,5 +1,5 @@
 import paho.mqtt.client as mqtt_client
-from Subscription.Topics import topics
+from Topics import topics
 
 # Server
 MQTT_BROKER = "mqtt.gw.wlan"
