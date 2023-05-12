@@ -3,7 +3,7 @@
 topics = [
     "Maison/Test",
 
-    "Maison/Temperature/Interieur",
-    "Maison/Temperature/Exterieur",
+    "Maison/Humidite",
+    "Maison/Temperature",
     "Maison/Ventilateur/Vitesse"
 ]
