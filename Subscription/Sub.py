@@ -1,5 +1,7 @@
 import paho.mqtt.client as mqtt_client
 from Topics import topics
+from Pusher import pushToDB
+from Pusher import initDBConnection
 
 # Server
 MQTT_BROKER = "mqtt.gw.wlan"
@@ -8,7 +10,7 @@ KEEP_ALIVE  = 45
 
 # Appelée lors de logs
 def onLog(client, userdata, level, buffer):
-    print("Log: ${buffer}")
+    print("Log: " + buffer)
 
 # Appelée lors de la connection d'un client
 def onConnection(client, userdata, flags, rc):
@@ -16,7 +18,11 @@ def onConnection(client, userdata, flags, rc):
 
 # Appelée lorsque qu'un message est reçu
 def onMessage(client, userdata, message):
-    print(message.topic, message.payload)
+
+    topic = message.topic
+    value = message.payload
+
+    pushToDB(topic, value)
 
 # Main 
 def main():
@@ -34,5 +40,7 @@ def main():
         client.subscribe(topic)
 
     client.loop_forever()
+
+    #initDBConnection()
 
 main()

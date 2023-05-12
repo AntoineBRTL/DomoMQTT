@@ -5,5 +5,6 @@ topics = [
 
     "Maison/Humidite",
     "Maison/Temperature",
-    "Maison/Ventilateur/Vitesse"
+    "Maison/Ventilateur/Vitesse",
+    "Maison/Mode"
 ]
