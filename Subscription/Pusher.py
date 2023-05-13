@@ -2,17 +2,17 @@ import sqlite3
 
 cursor: sqlite3.Cursor
 
-def initDBConnection():
+def init_database_connection():
+    """
+    Initialise une connection avec la base de donnée
+    """
 
     connection = sqlite3.connect("./DomoDB/domo.db")
     cursor     = connection.cursor()
 
-# Contient des fonctions utiles pour l'envoie en base de donnée
-
-# Cette fonction envoie une valeur en base de donnée
-def pushToDB(topic: str, value: bytes):
-
-    decodedValue: str = value.decode()
-
+def push_to_database(topic: str, value: str):
+    """
+    Stock une publication en base de donnée
+    """
     #cursor.execute("INSERT INTO DonneeActuelles VALUES ()")
-    print(topic, decodedValue)
+    print(topic, value)

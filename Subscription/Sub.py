@@ -1,46 +1,51 @@
-import paho.mqtt.client as mqtt_client
+import paho.mqtt.client as mqtt
 from Topics import topics
-from Pusher import pushToDB
-from Pusher import initDBConnection
+from Pusher import push_to_database
+from Pusher import init_database_connection
 
-# Server
+# Constantes utiles pour la connection au server MQTT
 MQTT_BROKER = "mqtt.gw.wlan"
 MQTT_PORT   = 1883
 KEEP_ALIVE  = 45
 
-# Appelée lors de logs
-def onLog(client, userdata, level, buffer):
+def on_log(client, userdata, level, buffer):
+    """
+    Appelée quand un log est recu
+    """
+
     print("Log: " + buffer)
 
-# Appelée lors de la connection d'un client
-def onConnection(client, userdata, flags, rc):
+def on_connection(client, userdata, flags, rc):
+    """
+    Appelée lorsqu'une connection est etablie
+    """
+    
     print("New connection")
 
-# Appelée lorsque qu'un message est reçu
-def onMessage(client, userdata, message):
+def on_message(client, userdata, message):
+    """
+    Appelée lorsque qu'une publication est recue
+    """
 
-    topic = message.topic
-    value = message.payload
+    topic: str = message.topic
+    value: str = message.payload.decode()
 
-    pushToDB(topic, value)
+    push_to_database(topic, value)
 
-# Main 
 def main():
-    client = mqtt_client.Client(client_id="Raspberry")
+    client: mqtt.Client = mqtt.Client(client_id="Raspberry")
 
-    client.on_message = onMessage
-    client.on_connect = onConnection
-    client.on_log     = onLog
+    client.on_message = on_message
+    client.on_connect = on_connection
+    client.on_log     = on_log
 
     client.username_pw_set(username="Rasp", password="RaspDomo")
     client.connect(host=MQTT_BROKER, port=MQTT_PORT, keepalive=KEEP_ALIVE)
 
-    # Sub to all topics
+    # Souscription a tout les topic dans le fichier ./Topics.py
     for topic in topics:
         client.subscribe(topic)
 
     client.loop_forever()
-
-    #initDBConnection()
 
 main()
