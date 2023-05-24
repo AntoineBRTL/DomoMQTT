@@ -10,7 +10,7 @@ KEEP_ALIVE  = 45
 
 def on_log(client, userdata, level, buffer):
     """
-    Appelée quand un log est recu
+    Appelée quand un log est reçu
     """
 
     print("Log: " + buffer)
@@ -24,7 +24,7 @@ def on_connection(client, userdata, flags, rc):
 
 def on_message(client, userdata, message):
     """
-    Appelée lorsque qu'une publication est recue
+    Appelée lorsque qu'une publication est reçue
     """
 
     topic: str = message.topic
