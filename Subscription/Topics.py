@@ -4,8 +4,9 @@ topics = [
     
     "Maison/Test",
 
-    "Maison/Humidite",
+    "Maison/Ventilateur/Mode",
+    "Maison/Ventilateur/Actif",
+    "Maison/Ventilateur/Ctrl",
+
     "Maison/Temperature",
-    "Maison/Ventilateur/Vitesse",
-    "Maison/Mode"
 ]

@@ -33,6 +33,9 @@ def on_message(client, userdata, message):
     push_to_database(topic, value)
 
 def main():
+
+    init_database_connection()
+
     client: mqtt.Client = mqtt.Client(client_id="Raspberry")
 
     client.on_message = on_message
