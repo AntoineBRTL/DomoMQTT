@@ -23,9 +23,18 @@ def push_to_database(topic: str, value: str):
     Update en base de donnée
     """
     where = dbID[topic]
+    table = where[0]
+    type  = where[1]
 
-    cursor.execute('''
-    UPDATE ''' + where[0] + '''
-    SET valeur=''' + value + '''
-    WHERE type_de_donnees = ''' + where[1] + '''
-    ''')
+    if(table == "donnees_actuelles"):
+        cursor.execute('''
+        UPDATE ''' + table + '''
+        SET valeur=''' + value + '''
+        WHERE type_de_donnees = ''' + type + '''
+        ''')
+
+    elif(table == "historique"):
+        cursor.execute('''
+        INSERT INTO historique (type_de_donnees, valeur)
+        VALUES (''' + type + ''', ''' + value + ''')
+        ''')
