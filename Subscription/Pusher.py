@@ -6,6 +6,7 @@ dbID = {
     "Maison/Ventilateur/Mode":["donnees_actuelles", "ventilateur_mode"],
     "Maison/Ventilateur/Actif":["donnees_actuelles","ventilateur_ctrl"],
     "Maison/Ventilateur/Ctrl":["donnees_actuelles","ventilateur_actif"],
+    
     "Maison/Temperature":["historique","temperature"],
     "Maison/Humidite":["historique","humidite"],
 }

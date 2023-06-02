@@ -9,4 +9,5 @@ topics = [
     "Maison/Ventilateur/Ctrl",
 
     "Maison/Temperature",
+    "Maison/Humidite",
 ]
