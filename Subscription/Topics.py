@@ -1,10 +1,10 @@
 # Tout les topics sont dans ce fichier
 
-def get_topics() -> list[str]:
+def get_topics():
     '''Renvois la liste de topics renseignés dans le programme.'''
     return list(topicDbInfo.keys())
 
-def get_dbinfo_from_topic(topic: str) -> dict[str, str]:
+def get_dbinfo_from_topic(topic: str):
     '''Renvois des informations utiles pour la base de donnée en fonction du topic donné.'''
 
     return topicDbInfo[topic]

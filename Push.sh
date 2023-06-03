@@ -1,3 +1,3 @@
 # Push project to Rasp
 
-scp -r ../Domo pi@gw.wlan:
+scp -r ../DomoMQTT pi@gw.wlan:

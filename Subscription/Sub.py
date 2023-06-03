@@ -1,7 +1,6 @@
 import paho.mqtt.client as mqtt
 from Topics import get_topics
 from Pusher import push_to_database
-from Pusher import init_database_connection
 
 # Constantes utiles pour la connection au server MQTT
 MQTT_BROKER = "mqtt.gw.wlan"
@@ -36,8 +35,6 @@ def main():
     '''
     Entrée du programme de subscription principal.
     '''
-
-    init_database_connection()
 
     client: mqtt.Client = mqtt.Client(client_id="Raspberry")
 

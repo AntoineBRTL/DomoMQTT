@@ -26,6 +26,6 @@ def main():
 
     client.on_log = on_log
 
-    client.publish("Maison/Test", "Hello World !")
+    client.publish("Maison/Temperature", "1")
 
 main()
