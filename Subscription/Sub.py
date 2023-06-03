@@ -1,5 +1,5 @@
 import paho.mqtt.client as mqtt
-from Topics import topics
+from Topics import get_topics
 from Pusher import push_to_database
 from Pusher import init_database_connection
 
@@ -10,21 +10,21 @@ KEEP_ALIVE  = 45
 
 def on_log(client, userdata, level, buffer):
     """
-    Appelée quand un log est reçu
+    Appelée quand un log est reçu.
     """
 
     print("Log: " + buffer)
 
 def on_connection(client, userdata, flags, rc):
     """
-    Appelée lorsqu'une connection est etablie
+    Appelée lorsqu'une connection est etablie.
     """
     
     print("New connection")
 
 def on_message(client, userdata, message):
     """
-    Appelée lorsque qu'une publication est reçue
+    Appelée lorsque qu'une publication est reçue.
     """
 
     topic: str = message.topic
@@ -32,7 +32,10 @@ def on_message(client, userdata, message):
 
     push_to_database(topic, value)
 
-def main():
+def main(): 
+    '''
+    Entrée du programme de subscription principal.
+    '''
 
     init_database_connection()
 
@@ -45,6 +48,7 @@ def main():
     client.username_pw_set(username="Rasp", password="RaspDomo")
     client.connect(host=MQTT_BROKER, port=MQTT_PORT, keepalive=KEEP_ALIVE)
 
+    topics = get_topics()
     # Souscription a tout les topic dans le fichier ./Topics.py
     for topic in topics:
         client.subscribe(topic)

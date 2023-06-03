@@ -1,19 +1,12 @@
 import sqlite3
 
-cursor: sqlite3.Cursor = None
+from Topics import get_dbinfo_from_topic
 
-dbID = {
-    "Maison/Ventilateur/Mode":["donnees_actuelles", "ventilateur_mode"],
-    "Maison/Ventilateur/Actif":["donnees_actuelles","ventilateur_ctrl"],
-    "Maison/Ventilateur/Ctrl":["donnees_actuelles","ventilateur_actif"],
-    
-    "Maison/Temperature":["historique","temperature"],
-    "Maison/Humidite":["historique","humidite"],
-}
+cursor: sqlite3.Cursor = None
 
 def init_database_connection():
     """
-    Initialise une connection avec la base de donnée
+    Initialise une connection avec la base de donnée.
     """
 
     connection = sqlite3.connect("Web/domo/src/domo")
@@ -21,11 +14,16 @@ def init_database_connection():
 
 def push_to_database(topic: str, value: str):
     """
-    Update en base de donnée
+    Envoie en base de donnée. La request SQL varie en fonction du topic sur 
+    lequel une valeur est recue.
+
+    Attention une connection avec la base de donnée doit d'abord etre ouverte
+    avec la fonction init_database_connection() .
     """
-    where = dbID[topic]
-    table = where[0]
-    type  = where[1]
+
+    dbLoc = get_dbinfo_from_topic(topic)
+    table = dbLoc["table"]
+    type  = dbLoc["type"]
 
     if(table == "donnees_actuelles"):
         cursor.execute('''
